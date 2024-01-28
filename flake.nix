@@ -38,6 +38,17 @@
       ];
 
       GO111MODULE="on";
+
+      # needed for running delve
+      # https://github.com/go-delve/delve/issues/3085
+      # https://nixos.wiki/wiki/C#Hardening_flags
+      hardeningDisable = [ "all" ];
+
+      # print the go version and gstreamer version on shell startup
+      shellHook = ''
+        ${pkgs.go}/bin/go version
+        ${pkgs.gst_all_1.gstreamer}/bin/gst-launch-1.0 --version
+      '';
     };
   };
 }
